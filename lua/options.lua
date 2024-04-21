@@ -39,6 +39,8 @@ cmd("au FileType netrw nmap <buffer> s <nop>")
 cmd("au FileType netrw nmap <buffer> o <nop>")
 cmd("au FileType netrw nmap <buffer> t <nop>")
 cmd("au FileType netrw nmap <buffer> p <nop>")
+cmd("au FileType netrw nmap <buffer> u <nop>")
+cmd("au FileType netrw nmap <buffer> i <nop>")
 cmd("set background=dark")
 cmd [[let g:copilot_no_tab_map = v:true]]
 cmd [[let g:copilot_filetypes = {

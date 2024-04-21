@@ -27,6 +27,7 @@ keymap.set("n", "<leader>d", "Vd")
 --     vim.cmd("Ex")
 --     vim.cmd(command)
 -- end)
+keymap.set("n", "<A-e>", "<cmd>Ex<CR>")
 
 keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
 	expr = true,
