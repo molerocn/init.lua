@@ -22,11 +22,11 @@ keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
 keymap.set("n", "s", "<Esc><cmd>w<CR>")
 keymap.set("n", "<leader>d", "Vd")
-keymap.set("n", "<A-e>", function()
-    local command = "/" .. vim.fn.expand("%:t:r")
-    vim.cmd("Ex")
-    vim.cmd(command)
-end)
+-- keymap.set("n", "<A-e>", function()
+--     local command = "/" .. vim.fn.expand("%:t:r")
+--     vim.cmd("Ex")
+--     vim.cmd(command)
+-- end)
 
 keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
 	expr = true,
@@ -34,6 +34,7 @@ keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
 })
 
 keymap.set({ "n", "v", "i" }, "<C-s>", "<Esc><cmd>w<CR>")
+keymap.set({ "n", "i" }, "<C-l>", "<nop>")
 keymap.set("n", "<C-z>", "<cmd>q<CR>")
-keymap.set({ "n", "i" }, "<C-l>", "<Esc>A;<Esc>")
+keymap.set("n", "<A-z>", "<cmd>qa!<CR>")
 keymap.set("i", "<C-r>", "<Esc>O")
