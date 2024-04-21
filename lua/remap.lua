@@ -1,6 +1,6 @@
 local keymap = vim.keymap
 
-vim.g.mapleader = " "
+vim.g.mapleader = ","
 keymap.set("v", "K", "k")
 keymap.set("v", "J", "j")
 keymap.set("v", "R", ":m '<-2<CR>gv=gv")
@@ -16,6 +16,7 @@ keymap.set("i", "<C-c>", "<Esc>")
 keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/bin/tmux-sessionizer<CR>")
 keymap.set("n", "<leader>u", "<cmd>UndotreeToggle<CR>")
 keymap.set("n", "<Tab>", ";")
+keymap.set("n", " ", ",")
 keymap.set("i", "<C-BS>", "<C-w>")
 keymap.set("i", "<C-h>", "<C-w>")
 keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
@@ -34,6 +35,8 @@ keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
 	replace_keycodes = false
 })
 
+keymap.set("n", "<leader>q", "q")
+keymap.set("n", "q", "<nop>")
 keymap.set({ "n", "v", "i" }, "<C-s>", "<Esc><cmd>w<CR>")
 keymap.set({ "n", "i" }, "<C-l>", "<nop>")
 keymap.set("n", "<C-z>", "<cmd>q<CR>")
