@@ -3,8 +3,8 @@ local keymap = vim.keymap
 vim.g.mapleader = ","
 keymap.set("v", "K", "k")
 keymap.set("v", "J", "j")
-keymap.set("v", "R", ":m '<-2<CR>gv=gv")
-keymap.set("v", "N", ":m '>+1<CR>gv=gv")
+keymap.set("v", "P", ":m '<-2<CR>gv=gv")
+keymap.set("v", "E", ":m '>+1<CR>gv=gv")
 keymap.set("n", "J", "mzJ`z")
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
@@ -22,23 +22,23 @@ keymap.set("i", "<C-h>", "<C-w>")
 keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
 keymap.set("n", "s", "<Esc><cmd>w<CR>")
-keymap.set("n", "<leader>d", "Vd")
--- keymap.set("n", "<A-e>", function()
---     local command = "/" .. vim.fn.expand("%:t:r")
---     vim.cmd("Ex")
---     vim.cmd(command)
--- end)
-keymap.set("n", "<A-e>", "<cmd>Ex<CR>")
+keymap.set("n", "<leader>d", "Vd<cmd>w<CR>")
+keymap.set("n", "<leader>pv", "<cmd>Ex<CR>")
 
 keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
 	expr = true,
 	replace_keycodes = false
 })
 
-keymap.set("n", "<leader>q", "q")
 keymap.set("n", "q", "<nop>")
 keymap.set({ "n", "v", "i" }, "<C-s>", "<Esc><cmd>w<CR>")
 keymap.set({ "n", "i" }, "<C-l>", "<nop>")
 keymap.set("n", "<C-z>", "<cmd>q<CR>")
-keymap.set("n", "<A-z>", "<cmd>qa!<CR>")
+keymap.set("n", "<leader>z", "<cmd>qa!<CR>")
 keymap.set("i", "<C-r>", "<Esc>O")
+
+-- keymap.set("n", "<A-e>", function()
+--     local command = "/" .. vim.fn.expand("%:t:r")
+--     vim.cmd("Ex")
+--     vim.cmd(command)
+-- end)

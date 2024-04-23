@@ -21,6 +21,8 @@ return {
                 cmd = { "clangd", "--offset-encoding=utf-16" },
             })
             vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+            vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+            vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
             vim.keymap.set("n", "<leader>vl", vim.diagnostic.setloclist)
 
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -41,7 +43,7 @@ return {
                     vim.keymap.set("n", "<leader>re", vim.lsp.buf.rename, opts)
                     vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
                     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-                    vim.keymap.set('n', '<A-f>', function()
+                    vim.keymap.set('n', '<leader>f', function()
                         vim.lsp.buf.format { async = true }
                     end, opts)
                 end,
