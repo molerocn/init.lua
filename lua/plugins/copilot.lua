@@ -1,5 +1,5 @@
 return {
-    "github/copilot.vim",
-    lazy = false,
-    cmd = "Copilot"
+    -- "github/copilot.vim",
+    -- lazy = false,
+    -- cmd = "Copilot"
 }

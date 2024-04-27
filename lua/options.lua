@@ -42,11 +42,6 @@ cmd("au FileType netrw nmap <buffer> p <nop>")
 cmd("au FileType netrw nmap <buffer> u <nop>")
 cmd("au FileType netrw nmap <buffer> i <nop>")
 cmd("set background=dark")
-cmd [[let g:copilot_no_tab_map = v:true]]
-cmd [[let g:copilot_filetypes = {
-	      \ 'markdown': v:false,
-	      \ 'text': v:false,
-	      \ }]]
 
 vim.api.nvim_create_autocmd('TextYankPost', {
     group = vim.api.nvim_create_augroup('juancamr-highlight-yank', { clear = true }),

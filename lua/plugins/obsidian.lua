@@ -19,8 +19,8 @@ return {
                 img_folder = "./assets/"
             }
         })
-        vim.keymap.set("n", "<M-l>", "<cmd>ObsidianOpen<CR>")
-        vim.keymap.set("n", "<M-t>", "<cmd>ObsidianTemplate<CR>")
+        vim.keymap.set("n", "<leader>ol", "<cmd>ObsidianOpen<CR>")
+        vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianTemplate<CR>")
         vim.keymap.set("n", "<leader>op", "<cmd>ObsidianPasteImg<CR>")
     end
 }

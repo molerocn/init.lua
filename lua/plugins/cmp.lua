@@ -24,9 +24,7 @@ return {
                 mapping = cmp.mapping.preset.insert({
                     ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
                     ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-                    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
                     ["<C-e>"] = cmp.mapping.confirm({ select = true }),
-                    ["<C-y>"] = cmp.config.disable,
                     ["<C-Space>"] = cmp.mapping.complete(),
                 }),
                 completion = { completeopt = "menu,menuone,noinsert" },
