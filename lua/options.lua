@@ -32,8 +32,8 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 cmd("au FileType netrw nmap <buffer> a %")
-cmd("au FileType netrw nmap <buffer> h -")
 cmd("au FileType netrw nmap <buffer> r R")
+cmd("au FileType netrw nmap <buffer> h -")
 cmd("au FileType netrw nmap <buffer> v <nop>")
 cmd("au FileType netrw nmap <buffer> s <nop>")
 cmd("au FileType netrw nmap <buffer> o <nop>")

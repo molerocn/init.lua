@@ -3,8 +3,8 @@ local keymap = vim.keymap
 vim.g.mapleader = ","
 keymap.set("v", "K", "k")
 keymap.set("v", "J", "j")
-keymap.set("v", "P", ":m '<-2<CR>gv=gv")
-keymap.set("v", "E", ":m '>+1<CR>gv=gv")
+keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv")
+keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv")
 keymap.set("n", "J", "mzJ`z")
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
@@ -23,9 +23,11 @@ keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
 keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
 keymap.set({ "n", "v" }, "s", "<Esc><cmd>w<CR>")
 keymap.set("v", "W", "<nop>")
+keymap.set("n", "H", "<nop>")
+keymap.set("n", "L", "<nop>")
 keymap.set("v", "N", "<nop>")
 keymap.set("n", "<leader>v", "<cmd>Ex<CR>2j")
-keymap.set("i", "<C-v>", "<nop>")
+keymap.set("i", "<C-v>", "<C-S-v>")
 keymap.set({ "n", "v", "i" }, "<C-s>", "<Esc><cmd>w<CR>")
 keymap.set({ "i", "n" }, "<C-l>", "<Esc>A;<Esc><cmd>w<CR>")
 keymap.set("n", "<C-z>", "<cmd>q<CR>")
@@ -33,7 +35,7 @@ keymap.set("n", "<leader>z", "<cmd>qa!<CR>")
 keymap.set("i", "<C-r>", "<Esc>O")
 keymap.set("n", "<leader>d", "dd<cmd>w<CR>")
 
-
-
-
-
+keymap.set("n", "(", "<nop>")
+keymap.set("n", ")", "<nop>")
+keymap.set("n", "+", "<nop>")
+keymap.set("n", "-", "<nop>")

@@ -7,14 +7,17 @@ return {
             "L3MON4D3/LuaSnip",
         },
         config = function()
-            local luasnip = require("luasnip")
+            local ls = require("luasnip")
             local cmp = require("cmp")
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
+
+            vim.keymap.set({"i", "s"}, "<C-k><Tab>", function() ls.jump(1) end, {silent = true})
+            vim.keymap.set({"i", "s"}, "<C-k>,", function() ls.jump(-1) end, {silent = true})
 
             cmp.setup({
                 snippet = {
                     expand = function(args)
-                        luasnip.lsp_expand(args.body)
+                        ls.lsp_expand(args.body)
                     end,
                 },
                 sources = cmp.config.sources({
