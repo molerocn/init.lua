@@ -11,8 +11,8 @@ return {
             local cmp = require("cmp")
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-            vim.keymap.set({"i", "s"}, "<C-k><Tab>", function() ls.jump(1) end, {silent = true})
-            vim.keymap.set({"i", "s"}, "<C-k>,", function() ls.jump(-1) end, {silent = true})
+            vim.keymap.set({"i", "s"}, "<C-e><Tab>", function() ls.jump(1) end, {silent = true})
+            vim.keymap.set({"i", "s"}, "<C-e>,", function() ls.jump(-1) end, {silent = true})
 
             cmp.setup({
                 snippet = {
