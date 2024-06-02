@@ -3,7 +3,10 @@ return {
     lazy = false,
     config = function()
         vim.keymap.set("n", "<leader>gs", "<cmd>Git<CR>4j")
-        vim.keymap.set("n", "<leader>gp", "<cmd>Git push<CR>")
+        vim.keymap.set("n", "<leader>gp", function()
+            print("Pushing to remote")
+            vim.cmd("!git push")
+        end)
         vim.keymap.set("n", "<leader>gl", "<cmd>Git log --oneline --decorate --graph --all<CR>")
         vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
         vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
