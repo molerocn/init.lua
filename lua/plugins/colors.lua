@@ -3,11 +3,17 @@ return {
     name = "rose-pine",
     lazy = false,
     priority = 1000,
+    dependencies = {
+        "ellisonleao/gruvbox.nvim"
+    },
     config = function()
+        require("gruvbox").setup({
+            transparent_mode = true
+        })
         require("rose-pine").setup({
             disable_background = true,
             styles = { italic = false }
         })
-        vim.cmd.colorscheme("rose-pine")
+        vim.cmd.colorscheme("gruvbox")
     end,
 }
