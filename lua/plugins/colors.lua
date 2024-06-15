@@ -7,9 +7,7 @@ return {
         "ellisonleao/gruvbox.nvim"
     },
     config = function()
-        require("gruvbox").setup({
-            transparent_mode = true
-        })
+        require("gruvbox").setup()
         require("rose-pine").setup({
             disable_background = true,
             styles = { italic = false }
