@@ -4,7 +4,8 @@ return {
     lazy = false,
     priority = 1000,
     dependencies = {
-        "ellisonleao/gruvbox.nvim"
+        "ellisonleao/gruvbox.nvim",
+        "projekt0n/github-nvim-theme"
     },
     config = function()
         require("gruvbox").setup()
