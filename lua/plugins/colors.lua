@@ -13,6 +13,6 @@ return {
             disable_background = true,
             styles = { italic = false }
         })
-        vim.cmd.colorscheme("gruvbox")
+        vim.cmd.colorscheme("rose-pine")
     end,
 }
