@@ -53,12 +53,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
-cmd [[let g:copilot_no_tab_map = v:true]]
-cmd [[let g:copilot_filetypes = {
-	      \ 'markdown': v:false,
-	      \ 'text': v:false,
-	      \ }]]
-vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
-	expr = true,
-	replace_keycodes = false
-})
+-- cmd [[let g:copilot_no_tab_map = v:true]]
+-- cmd [[let g:copilot_filetypes = {
+-- 	      \ 'markdown': v:false,
+-- 	      \ 'text': v:false,
+-- 	      \ }]]
+-- vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
+-- 	expr = true,
+-- 	replace_keycodes = false
+-- })

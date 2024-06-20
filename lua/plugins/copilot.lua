@@ -1,5 +1,7 @@
 return {
-    "github/copilot.vim",
+    "supermaven-inc/supermaven-nvim",
     lazy = false,
-    cmd = "Copilot"
+    config = function()
+        require('supermaven-nvim').setup({})
+    end
 }

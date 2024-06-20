@@ -27,17 +27,16 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
                 ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-                ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-                ['.'] = function(fallback)
-                    if cmp.visible() then
-                        cmp.confirm({ select = true })
-                        vim.api.nvim_feedkeys('.', 'n', true)
-                    else
-                        fallback() -- Si no hay sugerencia visible, solo escribe un punto
-                    end
-                end,
+                -- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
+                -- ['.'] = function(fallback)
+                --     if cmp.visible() then
+                --         cmp.confirm({ select = true })
+                --         vim.api.nvim_feedkeys('.', 'n', true)
+                --     else
+                --         fallback() -- Si no hay sugerencia visible, solo escribe un punto
+                --     end
+                -- end,
                 ["<C-Space>"] = cmp.mapping.complete(),
-                ["<C-y>"] = cmp.config.disable,
             }),
             completion = { completeopt = "menu,menuone,noinsert" },
         })
