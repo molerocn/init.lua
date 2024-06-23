@@ -9,5 +9,11 @@ return {
     },
     config = function()
         vim.cmd.colorscheme("kanagawa")
+        function Transparent()
+            require("kanagawa").setup({
+                transparent = true,
+            })
+            vim.cmd.colorscheme("kanagawa")
+        end
     end,
 }

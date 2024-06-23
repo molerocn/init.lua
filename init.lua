@@ -16,3 +16,11 @@ require("remap")
 require("options")
 
 require("lazy").setup("plugins", { defaults = { lazy = true } })
+
+-- return {
+--     "supermaven-inc/supermaven-nvim",
+--     lazy = false,
+--     config = function()
+--         require('supermaven-nvim').setup({})
+--     end
+-- }

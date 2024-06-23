@@ -7,17 +7,17 @@ return {
         "L3MON4D3/LuaSnip",
     },
     config = function()
-        local ls = require("luasnip")
+        local luasnip = require("luasnip")
         local cmp = require("cmp")
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-        vim.keymap.set({ "i", "s" }, "<C-e><Tab>", function() ls.jump(1) end, { silent = true })
-        vim.keymap.set({ "i", "s" }, "<C-e>,", function() ls.jump(-1) end, { silent = true })
+        vim.keymap.set({ "i", "s" }, "<C-e><Tab>", function() luasnip.jump(1) end, { silent = true })
+        vim.keymap.set({ "i", "s" }, "<C-e>,", function() luasnip.jump(-1) end, { silent = true })
 
         cmp.setup({
             snippet = {
                 expand = function(args)
-                    ls.lsp_expand(args.body)
+                    luasnip.lsp_expand(args.body)
                 end,
             },
             sources = cmp.config.sources({
@@ -27,15 +27,20 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
                 ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-                -- ["<Tab>"] = cmp.mapping.confirm({ select = true }),
-                -- ['.'] = function(fallback)
-                --     if cmp.visible() then
-                --         cmp.confirm({ select = true })
-                --         vim.api.nvim_feedkeys('.', 'n', true)
-                --     else
-                --         fallback() -- Si no hay sugerencia visible, solo escribe un punto
-                --     end
-                -- end,
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                    if luasnip.locally_jumpable(1) then
+                        luasnip.jump(1)
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    if luasnip.locally_jumpable(-1) then
+                        luasnip.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
             completion = { completeopt = "menu,menuone,noinsert" },
