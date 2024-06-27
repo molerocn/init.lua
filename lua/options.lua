@@ -26,6 +26,7 @@ opt.colorcolumn = "80"
 opt.splitright = true
 opt.ignorecase = true
 opt.smartcase = true
+-- opt.cursorline= true
 
 -- netrw
 vim.g.netrw_browse_split = 0
