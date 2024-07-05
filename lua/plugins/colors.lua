@@ -3,11 +3,17 @@ return {
     name = "rose-pine",
     lazy = false,
     priority = 1000,
+    dependencies = {
+        "craftzdog/solarized-osaka.nvim"
+    },
     config = function()
         require("rose-pine").setup({
-            disable_background = true,
+            -- disable_background = true,
             styles = { italic = false }
         })
-        vim.cmd.colorscheme("rose-pine")
+        require("solarized-osaka").setup({
+            transparent = false
+        })
+        vim.cmd.colorscheme("solarized-osaka")
     end,
 }
