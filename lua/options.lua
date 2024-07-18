@@ -3,6 +3,7 @@ local cmd = vim.cmd
 
 -- options
 -- opt.guicursor = ""
+opt.cursorline = true
 opt.nu = true
 opt.relativenumber = true
 opt.tabstop = 4
