@@ -38,6 +38,7 @@ keymap.set("n", "<leader>d", "VD<cmd>w<CR>")
 keymap.set({"n", "v"}, ";", ":")
 keymap.set("n", 'q', '<nop>')
 keymap.set("i", "<C-r>", "<nop>")
+keymap.set("i", "<C-b>", "<nop>")
 keymap.set("v", 'q', '<nop>')
 keymap.set("n", '<C-o>', '<C-o>zz')
 

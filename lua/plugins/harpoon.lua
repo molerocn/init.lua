@@ -8,7 +8,7 @@ return {
 
         harpoon:setup({ settings = { save_on_toggle = true } })
 
-        vim.keymap.set("n", "<leader>h", function()
+        vim.keymap.set("n", "<C-Space>", function()
             harpoon:list():append()
         end)
         vim.keymap.set({ "n", "v" }, "<C-e>", function()
