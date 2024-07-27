@@ -1,7 +1,7 @@
 local M = {}
 
 M.treesitter_languages = { "javascript", "typescript", "python", "lua", "cpp", "markdown", "astro" }
-M.lsp_servers = { "clangd", "lua_ls", "pyright", "tsserver", "astro", "emmet_language_server", "jdtls", "clangd", "gopls", "texlab" }
+M.lsp_servers = { "clangd", "lua_ls", "pyright", "tsserver", "jdtls", "gopls", "texlab", "kotlin_language_server" }
 
 M.lazy_load = function(plugin)
     vim.api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "BufNewFile" }, {
