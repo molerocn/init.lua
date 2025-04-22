@@ -3,9 +3,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-        init = function()
-            require("utils").lazy_load("nvim-treesitter")
-        end,
+        lazy = false,
         config = function()
             local configs = require("nvim-treesitter.configs")
             local treesitter_languages = require("utils").treesitter_languages
@@ -18,13 +16,4 @@ return {
             })
         end,
     },
-    {
-        "nvim-treesitter/nvim-treesitter-context",
-        init = function()
-            require("utils").lazy_load("nvim-treesitter-context")
-        end,
-        config = function()
-            require("treesitter-context").setup()
-        end,
-    }
 }

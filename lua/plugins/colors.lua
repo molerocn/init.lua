@@ -9,8 +9,8 @@ return {
     config = function()
         require("catppuccin").setup({});
         require("solarized-osaka").setup({
-            transparent = false,
+            transparent = true,
         })
-        vim.cmd.colorscheme("catppuccin")
+        vim.cmd.colorscheme("solarized-osaka")
     end,
 }

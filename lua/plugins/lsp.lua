@@ -1,14 +1,11 @@
 return {
         "neovim/nvim-lspconfig",
-        init = function()
-            require("utils").lazy_load("nvim-lspconfig")
-        end,
+        lazy = false,
         dependencies = { "ray-x/lsp_signature.nvim" },
         config = function()
             local lsp_servers = require("utils").lsp_servers
             local lspconfig = require("lspconfig")
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            table.remove(lsp_servers, 1)
             require("lsp_signature").setup()
 
             for _, lsp in ipairs(lsp_servers) do
