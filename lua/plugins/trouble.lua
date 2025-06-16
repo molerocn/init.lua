@@ -3,7 +3,7 @@ return {
     lazy = false,
     config = function()
         require("trouble").setup({
-            icons = false,
+            icons = {},
             fold_open = "-",
             fold_closed = "+",
             indent_lines = false,
@@ -16,6 +16,7 @@ return {
             use_diagnostic_signs = false
         })
 
-        vim.keymap.set("n", "<leader>tr", "<cmd>TroubleToggle<cr>")
+        vim.keymap.set("n", "<leader>tr", "<cmd>Trouble diagnostics toggle focus=true filter.severity=vim.diagnostic.severity.ERROR<cr>")
+        vim.keymap.set("n", "<leader>tw", "<cmd>Trouble diagnostics toggle focus=true<cr>")
     end,
 }

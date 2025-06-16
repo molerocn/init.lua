@@ -11,8 +11,8 @@ return {
         local cmp = require("cmp")
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-        vim.keymap.set({ "i", "s" }, "<C-e><Tab>", function() luasnip.jump(1) end, { silent = true })
-        vim.keymap.set({ "i", "s" }, "<C-e>,", function() luasnip.jump(-1) end, { silent = true })
+        vim.keymap.set({ "i", "s" }, "<C-e>l", function() luasnip.jump(1) end, { silent = true })
+        vim.keymap.set({ "i", "s" }, "<C-e>h", function() luasnip.jump(-1) end, { silent = true })
 
         cmp.setup({
             snippet = {
@@ -27,20 +27,6 @@ return {
             mapping = cmp.mapping.preset.insert({
                 ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
                 ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-                -- ["<CR>"] = cmp.mapping(function(fallback)
-                --     if cmp.visible() then
-                --         cmp.confirm()
-                --     else
-                --         fallback()
-                --     end
-                -- end, { "i", "s" }),
-                -- ["<Tab>"] = cmp.mapping(function(fallback)
-                --     if cmp.visible() then
-                --         cmp.confirm()
-                --     else
-                --         fallback()
-                --     end
-                -- end, { "i", "s" }),
                 ["<C-Space>"] = cmp.mapping.complete(),
             }),
             completion = { completeopt = "menu,menuone,noinsert" },
