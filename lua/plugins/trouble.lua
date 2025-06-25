@@ -16,7 +16,7 @@ return {
             use_diagnostic_signs = false
         })
 
-        vim.keymap.set("n", "<leader>tr", "<cmd>Trouble diagnostics toggle focus=true filter.severity=vim.diagnostic.severity.ERROR<cr>")
-        vim.keymap.set("n", "<leader>tw", "<cmd>Trouble diagnostics toggle focus=true<cr>")
+        vim.keymap.set("n", "<leader>tr", "<cmd>Trouble diagnostics focus=true filter.severity=vim.diagnostic.severity.ERROR<cr>")
+        vim.keymap.set("n", "<leader>tw", "<cmd>Trouble diagnostics focus=true<cr>")
     end,
 }

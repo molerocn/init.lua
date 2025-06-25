@@ -22,7 +22,8 @@ return {
         ft = 'typst',
         version = '1.*',
         opts = {
-            port = 8000
+            port = 8000,
+            open_cmd = "firefox --new-window %s -P app"
         }
     }
 }

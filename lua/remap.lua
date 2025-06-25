@@ -1,4 +1,5 @@
 local keymap = vim.keymap
+local utils = require("utils")
 
 vim.g.mapleader = " "
 keymap.set("v", "K", "k")
@@ -27,7 +28,7 @@ keymap.set("v", "N", "<nop>")
 keymap.set("i", "<C-v>", "<C-S-v>")
 keymap.set({ "n", "v" }, "s", "<Esc><cmd>w<CR>")
 keymap.set({ "n" }, "<C-s>", "<Esc><cmd>w<CR>")
-keymap.set({ "i", "n" }, "<C-_>", "<Esc><cmd>silent !tmux select-window -t 2<CR>")
+keymap.set("n", "<C-_>", "<Esc><cmd>silent !tmux select-window -t 2<CR>")
 keymap.set("n", "<leader>z", "<cmd>qa!<CR>")
 keymap.set("n", "(", "<nop>")
 keymap.set("n", ")", "<nop>")
@@ -47,6 +48,8 @@ keymap.set("n", "yie", 'yi"')
 keymap.set("n", "die", 'di"')
 keymap.set("n", "vie", 'vi"')
 
+keymap.set("n", "dte", 'dt"')
+
 keymap.set('n', '<leader>rc',
     'ipackage <CR><CR>public class Template {<CR><CR>public Template() {<CR>}<CR>}<Esc>:%s/Template/')
 keymap.set("n", "<leader>v", "<cmd>Ex<CR>2j")
@@ -55,25 +58,22 @@ keymap.set("n", "<leader>xd", function()
     require("cellular-automaton").start_animation("make_it_rain")
 end)
 
-keymap.set("n", "<leader>ww", function()
-    vim.cmd("set wrap linebreak")
-    vim.cmd("set breakindent")
-    vim.keymap.set("v", "k", "gk")
-    vim.keymap.set("v", "j", "gj")
-    vim.keymap.set("n", "k", "gk")
-    vim.keymap.set("n", "j", "gj")
+keymap.set("n", "<leader>ww", utils.doc_mode)
 
-    vim.cmd("set spell")
-    vim.cmd("set spelllang=es")
-    vim.keymap.set("n", "<leader>s", "z=")
-
-    -- Scroll visualmente media "pantalla" hacia abajo
-    vim.keymap.set("n", "<C-d>", function()
-        vim.cmd("normal! " .. math.floor(vim.o.scroll / 2 + 10) .. "gjzz")
-    end, { noremap = true, silent = true })
-
-    -- Scroll visualmente media "pantalla" hacia arriba
-    vim.keymap.set("n", "<C-u>", function()
-        vim.cmd("normal! " .. math.floor(vim.o.scroll / 2 + 10) .. "gkzz")
-    end, { noremap = true, silent = true })
-end)
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = "*.d2",
+    callback = function()
+        vim.keymap.set("n", "<leader>pr", function()
+            local current_file = vim.fn.expand("%:p") -- ruta absoluta
+            local file_name = vim.fn.expand("%:t")
+            local output_file = ".trash/" .. file_name .. ".svg"
+            -- print("Watching " .. current_file .. "...")
+            vim.fn.jobstart({ "d2", "--layout=TALA", "--watch", current_file, output_file }, {
+                stdout_buffered = false,
+                stderr_buffered = false,
+                on_stdout = function() end,
+                on_stderr = function() end,
+            })
+        end, { desc = "Watch D2 diagram", noremap = true, silent = true })
+    end,
+})
