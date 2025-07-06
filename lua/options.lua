@@ -56,6 +56,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "sql",
+    callback = function()
+        vim.g.omni_sql_no_default_maps = 0
+    end,
+})
+
 -- cmd [[let g:copilot_no_tab_map = v:true]]
 -- cmd [[let g:copilot_filetypes = {
 -- 	      \ 'markdown': v:false,

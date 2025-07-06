@@ -7,3 +7,4 @@ return {
         vim.keymap.set("n", "<leader>td", "<cmd>TodoTrouble toggle focus=true<CR>")
     end
 }
+

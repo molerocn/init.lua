@@ -5,7 +5,7 @@ local M = {}
 
 M.treesitter_languages = { "javascript", "typescript", "python", "cpp", "markdown", "astro" }
 -- M.lsp_servers = { "clangd", "lua_ls", "pyright", "tsserver", "jdtls", "gopls", "texlab", "kotlin_language_server" }
-M.lsp_servers = { "pyright", "ts_ls", "gopls", "lua_ls", "tinymist" }
+M.lsp_servers = { "pyright", "ts_ls", "gopls", "lua_ls", "tinymist", "sqls" }
 
 M.doc_mode = function()
     cmd("set wrap linebreak")

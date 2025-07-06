@@ -23,7 +23,7 @@ return {
         version = '1.*',
         opts = {
             port = 8000,
-            open_cmd = "firefox --new-window %s -P app"
+            open_cmd = "zen --new-window %s"
         }
     }
 }
