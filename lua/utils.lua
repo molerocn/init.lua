@@ -3,9 +3,9 @@ local keymap = vim.keymap
 
 local M = {}
 
-M.treesitter_languages = { "javascript", "typescript", "python", "cpp", "markdown", "astro" }
+M.treesitter_languages = { "javascript", "typescript", "python", "cpp", "markdown", "latex" }
 -- M.lsp_servers = { "clangd", "lua_ls", "pyright", "tsserver", "jdtls", "gopls", "texlab", "kotlin_language_server" }
-M.lsp_servers = { "pyright", "ts_ls", "gopls", "lua_ls", "tinymist", "sqls" }
+M.lsp_servers = { "pyright", "ts_ls", "gopls", "lua_ls", "tinymist", "sqls", "texlab" }
 
 M.doc_mode = function()
     cmd("set wrap linebreak")
@@ -28,6 +28,19 @@ M.doc_mode = function()
     keymap.set("n", "<C-u>", function()
         cmd("normal! " .. math.floor(vim.o.scroll / 2 + 10) .. "gkzz")
     end, { noremap = true, silent = true })
+end
+
+M.get_system_theme = function()
+    local handle = io.popen("gsettings get org.gnome.desktop.interface color-scheme")
+    if handle == nil then return "light" end
+    local result = handle:read("*a")
+    handle:close()
+
+    if result:match("dark") then
+        return "dark"
+    else
+        return "light"
+    end
 end
 
 return M

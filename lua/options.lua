@@ -63,6 +63,14 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+  end,
+})
+
+
 -- cmd [[let g:copilot_no_tab_map = v:true]]
 -- cmd [[let g:copilot_filetypes = {
 -- 	      \ 'markdown': v:false,

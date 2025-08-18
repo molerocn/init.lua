@@ -27,7 +27,7 @@ keymap.set("n", "L", "<nop>")
 keymap.set("v", "N", "<nop>")
 keymap.set("i", "<C-v>", "<C-S-v>")
 keymap.set({ "n", "v" }, "s", "<Esc><cmd>w<CR>")
-keymap.set({ "n" }, "<C-s>", "<Esc><cmd>w<CR>")
+keymap.set({ "n", "i" }, "<C-s>", "<Esc><cmd>w<CR>")
 keymap.set("n", "<C-_>", "<Esc><cmd>silent !tmux select-window -t 2<CR>")
 keymap.set("n", "<leader>z", "<cmd>qa!<CR>")
 keymap.set("n", "(", "<nop>")
@@ -39,9 +39,17 @@ keymap.set("i", "<C-b>", "<nop>")
 keymap.set("v", 'q', '<nop>')
 keymap.set("n", '<C-o>', '<C-o>zz')
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-keymap.set({ "n", "i" }, "<C-l>", "<Esc>A;<Esc>:w<CR>")
+keymap.set("n", "<leader>y", "yy")
+-- keymap.set({ "n", "i" }, "<C-l>", "<Esc>A;<Esc>:w<CR>")
+keymap.set("i", "<C-l>", "<Del>")
 keymap.set("n", "<leader>o", "o<C-c>")
 keymap.set("n", "<leader>O", "O<C-c>")
+-- keymap.set("i", "}", "}<Esc>vi{=va{<Esc>a")
+
+keymap.set("n", "cio", 'ci(')
+keymap.set("n", "yio", 'yi(')
+keymap.set("n", "dio", 'di(')
+keymap.set("n", "vio", 'vi(')
 
 keymap.set("n", "cie", 'ci"')
 keymap.set("n", "yie", 'yi"')
@@ -49,6 +57,7 @@ keymap.set("n", "die", 'di"')
 keymap.set("n", "vie", 'vi"')
 
 keymap.set("n", "dte", 'dt"')
+keymap.set("n", "cte", 'ct"')
 
 keymap.set('n', '<leader>rc',
     'ipackage <CR><CR>public class Template {<CR><CR>public Template() {<CR>}<CR>}<Esc>:%s/Template/')
@@ -59,21 +68,3 @@ keymap.set("n", "<leader>xd", function()
 end)
 
 keymap.set("n", "<leader>ww", utils.doc_mode)
-
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    pattern = "*.d2",
-    callback = function()
-        vim.keymap.set("n", "<leader>pr", function()
-            local current_file = vim.fn.expand("%:p") -- ruta absoluta
-            local file_name = vim.fn.expand("%:t")
-            local output_file = ".trash/" .. file_name .. ".svg"
-            -- print("Watching " .. current_file .. "...")
-            vim.fn.jobstart({ "d2", "--layout=TALA", "--watch", current_file, output_file }, {
-                stdout_buffered = false,
-                stderr_buffered = false,
-                on_stdout = function() end,
-                on_stderr = function() end,
-            })
-        end, { desc = "Watch D2 diagram", noremap = true, silent = true })
-    end,
-})
