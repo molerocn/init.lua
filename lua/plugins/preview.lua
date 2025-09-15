@@ -23,7 +23,7 @@ return {
         version = '1.*',
         opts = {
             port = 8000,
-            open_cmd = "zen --new-window %s"
+            open_cmd = "google-chrome-stable %s >/dev/null 2>&1"
         }
     }
 }

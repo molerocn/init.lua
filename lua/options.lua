@@ -56,20 +56,37 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = "sql",
+--     callback = function()
+--         vim.g.omni_sql_no_default_maps = 0
+--     end,
+-- })
+
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "sql",
+    pattern = "tex",
     callback = function()
-        vim.g.omni_sql_no_default_maps = 0
+        local utils = require("utils")
+        utils.doc_mode()
     end,
 })
 
+
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
-  end,
+    pattern = "*",
+    callback = function()
+        vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+    end,
 })
 
+vim.api.nvim_create_autocmd("BufReadPost", {
+    callback = function()
+        local last_pos = vim.fn.line([['"]])
+        if last_pos > 0 and last_pos <= vim.fn.line("$") then
+            vim.cmd('normal! g`"zz')
+        end
+    end,
+})
 
 -- cmd [[let g:copilot_no_tab_map = v:true]]
 -- cmd [[let g:copilot_filetypes = {
