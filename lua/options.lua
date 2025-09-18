@@ -35,8 +35,8 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 cmd("au FileType netrw nmap <buffer> a %")
 cmd("au FileType netrw nmap <buffer> r R")
-cmd("au FileType netrw nmap <buffer> h -")
-cmd("au FileType netrw nmap <buffer> l <CR>")
+cmd("au FileType netrw nmap <buffer> <BS> -")
+-- cmd("au FileType netrw nmap <buffer> l <CR>")
 cmd("au FileType netrw nmap <buffer> v <nop>")
 cmd("au FileType netrw nmap <buffer> s <nop>")
 cmd("au FileType netrw nmap <buffer> o <nop>")
@@ -46,8 +46,9 @@ cmd("au FileType netrw nmap <buffer> u <nop>")
 cmd("au FileType netrw nmap <buffer> i <nop>")
 cmd("set background=dark")
 
+-- yank animation
 vim.api.nvim_create_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('juancamr-highlight-yank', { clear = true }),
+    group = vim.api.nvim_create_augroup('molerocn-highlight-yank', { clear = true }),
     callback = function()
         vim.highlight.on_yank({
             higroup = "IncSearch",
@@ -63,15 +64,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 --     end,
 -- })
 
+-- activar doc mode cuando se ingresa en un archivo latex
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "tex",
     callback = function()
         local utils = require("utils")
-        utils.doc_mode()
+        vim.schedule(function()
+            utils.doc_mode("en")
+        end)
     end,
 })
 
-
+-- eliminar el formateo continuo en comentarios
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
     callback = function()
@@ -83,7 +87,9 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     callback = function()
         local last_pos = vim.fn.line([['"]])
         if last_pos > 0 and last_pos <= vim.fn.line("$") then
-            vim.cmd('normal! g`"zz')
+            vim.schedule(function()
+                vim.cmd('normal! g`"zz')
+            end)
         end
     end,
 })
@@ -97,3 +103,5 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- 	expr = true,
 -- 	replace_keycodes = false
 -- })
+
+---- autocmd para nvimtree

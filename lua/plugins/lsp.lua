@@ -17,48 +17,53 @@ return {
         require("java").setup()
         require("lsp_signature").setup()
 
-        lspconfig.jdtls.setup({
-            on_attach = function(client, bufnr)
-                keymap.set("n", "<leader>jo", function()
-                    jdtls.organize_imports()
-                end)
-                keymap.set("n", "<leader>jt", function()
-                    jdtls.tests.go_to_subject()
-                end)
-            end
-        })
-        lspconfig.tinymist.setup({
-            settings = {
-                formatterMode = "typstyle",
-            },
-            on_attach = function(client, bufnr)
-                keymap.set("n", "<leader>ts", function()
-                    client:exec_cmd({
-                        title = "pin",
-                        command = "tinymist.pinMain",
-                        arguments = { vim.api.nvim_buf_get_name(0) },
-                    }, { bufnr = bufnr })
-                    cmd("TypstPreview")
-                    utils.doc_mode()
-                end, { desc = "[T]inymist [P]in", noremap = true })
+        -- lspconfig.jdtls.setup({
+        --     on_attach = function(client, bufnr)
+        --         keymap.set("n", "<leader>jo", function()
+        --             jdtls.organize_imports()
+        --         end)
+        --         keymap.set("n", "<leader>jt", function()
+        --             jdtls.tests.go_to_subject()
+        --         end)
+        --     end
+        -- })
 
-                keymap.set("n", "<leader>tu", function()
-                    client:exec_cmd({
-                        title = "unpin",
-                        command = "tinymist.pinMain",
-                        arguments = { vim.v.null },
-                    }, { bufnr = bufnr })
-                end, { desc = "[T]inymist [U]npin", noremap = true })
-            end,
-        })
+        -- lspconfig.harper_ls.setup({
+        --     filetypes = { "tex" },
+        -- })
+        --
+        -- lspconfig.tinymist.setup({
+        --     settings = {
+        --         formatterMode = "typstyle",
+        --     },
+        --     on_attach = function(client, bufnr)
+        --         keymap.set("n", "<leader>ts", function()
+        --             client:exec_cmd({
+        --                 title = "pin",
+        --                 command = "tinymist.pinMain",
+        --                 arguments = { vim.api.nvim_buf_get_name(0) },
+        --             }, { bufnr = bufnr })
+        --             cmd("TypstPreview")
+        --             utils.doc_mode()
+        --         end, { desc = "[T]inymist [P]in", noremap = true })
 
-        -- linea para poder mostrar los diagnostic en tiempo real
-        vim.diagnostic.config({
-            virtual_text = {
-                prefix = ' ■ '
-            },
-            update_in_insert = true
-        })
+        --         keymap.set("n", "<leader>tu", function()
+        --             client:exec_cmd({
+        --                 title = "unpin",
+        --                 command = "tinymist.pinMain",
+        --                 arguments = { vim.v.null },
+        --             }, { bufnr = bufnr })
+        --         end, { desc = "[T]inymist [U]npin", noremap = true })
+        --     end,
+        -- })
+
+        -- mostrar los diagnostic en tiempo real
+        -- vim.diagnostic.config({
+        --     virtual_text = {
+        --         prefix = ' ■ '
+        --     },
+        --     update_in_insert = true
+        -- })
 
         for _, lsp in ipairs(utils.lsp_servers) do
             vim.lsp.enable(lsp)
