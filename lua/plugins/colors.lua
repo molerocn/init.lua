@@ -4,39 +4,51 @@ return {
     lazy = false,
     dependencies = {
         "projekt0n/github-nvim-theme",
+        "catppuccin/nvim",
+        "ellisonleao/gruvbox.nvim",
     },
+    priority = 1000,
     config = function()
         local utils = require("utils")
+        require('catppuccin').setup({
+            transparent_background = true
+        })
+
         require('rose-pine').setup({
             disable_background = true,
             styles = {
-                italic = false,
-            },
+                italic = false, },
+        })
+
+        require('gruvbox').setup({
+            transparent_mode = true
         })
 
         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
         vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
-        local set_default_colorscheme = function()
-            vim.cmd("colorscheme rose-pine")
+        vim.cmd("colorscheme gruvbox")
+
+        local dark_mode = function()
             vim.cmd("set background=dark")
         end
-        set_default_colorscheme()
 
-        -- cambiar automaticamente el tema segun el tema del sistema
-        local theme = utils.get_system_theme()
-        if theme == "dark" then
-            set_default_colorscheme()
-        else
-            vim.cmd("colorscheme github_light")
+        local light_mode = function()
+            vim.cmd("set background=light")
         end
 
-        vim.keymap.set("n", "<leader>th", function()
-            if (vim.g.colors_name == "rose-pine") then
-                vim.cmd("colorscheme github_light")
+        local refresh = function()
+            local theme = utils.get_system_theme()
+            if theme == "dark" then
+                dark_mode()
             else
-                set_default_colorscheme()
+                light_mode()
             end
+        end
+
+        refresh()
+        vim.keymap.set("n", "<leader>th", function()
+            refresh()
         end)
     end
 }

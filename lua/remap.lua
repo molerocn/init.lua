@@ -1,14 +1,12 @@
-local keymap = vim.keymap
+local v = vim
 local utils = require("utils")
+local keymap = v.keymap
 
-vim.g.mapleader = " "
-keymap.set("v", "M", ":m '<-2<CR>gv=")
-keymap.set("v", "B", ":m '>+1<CR>gv=")
-keymap.set("n", "M", "gv:m '<-2<CR>gv=")
-keymap.set("n", "B", "gv:m '>+1<CR>gv=")
+v.g.mapleader = " "
+keymap.set("v", "M", ":m '<-2<CR>gv=gv")
+keymap.set("v", "B", ":m '>+1<CR>gv=gv")
 keymap.set("n", "vap", "vip")
 keymap.set("n", "vip", "vap")
-keymap.set("v", "w", "<nop>")
 keymap.set("n", "J", "mzJ`z")
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
@@ -30,10 +28,9 @@ keymap.set("v", "N", "<nop>")
 keymap.set("i", "<C-v>", "<C-S-v>")
 keymap.set({ "n", "v" }, "s", "<Esc><cmd>w<CR>")
 keymap.set({ "n", "i" }, "<C-s>", "<Esc><cmd>w<CR>")
--- keymap.set("n", "<leader>z", "<cmd>qa!<CR>")
 keymap.set("n", "(", "<nop>")
 keymap.set("n", ")", "<nop>")
-keymap.set("n", "<leader>d", "VD<cmd>w<CR>")
+-- keymap.set("n", "<leader>d", "VD<cmd>w<CR>")
 keymap.set("n", "<leader>ce", "VC")
 keymap.set("i", "<C-r>", "<nop>")
 keymap.set("i", "<C-b>", "<nop>")
@@ -42,52 +39,44 @@ keymap.set("n", '<C-o>', '<C-o>zz')
 keymap.set("n", '<C-i>', '<C-i>zz')
 keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 keymap.set("n", "<leader>y", "yy")
--- keymap.set({ "n", "i" }, "<C-l>", "<Esc>A;<Esc>:w<CR>")
 keymap.set("i", "<C-l>", "<Del>")
 keymap.set("n", "<leader>o", "o<C-c>")
 keymap.set("n", "<leader>O", "O<C-c>")
--- keymap.set("i", "}", "}<Esc>vi{=va{<Esc>a")
-
+keymap.set("n", "<leader>gy", "ggVGy")
+keymap.set("n", "<leader>gty", "ggVG:y+<CR>")
 keymap.set("i", "<C-z>", "<C-c><cmd>wq<CR>")
 keymap.set("n", "<C-y>", "yy")
-
-keymap.set("n", "cio", 'ci(')
-keymap.set("n", "yio", 'yi(')
-keymap.set("n", "dio", 'di(')
-keymap.set("n", "vio", 'vi(')
-
-keymap.set("n", "cie", 'ci"')
-keymap.set("n", "yie", 'yi"')
-keymap.set("n", "die", 'di"')
-keymap.set("n", "vie", 'vi"')
-
-keymap.set("n", "dte", 'dt"')
-keymap.set("n", "cte", 'ct"')
-
-keymap.set('n', '<leader>rc',
-    'ipackage <CR><CR>public class Template {<CR><CR>public Template() {<CR>}<CR>}<Esc>:%s/Template/')
-
--- keymap.set("n", "<leader>v", "<cmd>Ex<CR>2j")
--- open explorer with cursor on the last opened file
-keymap.set("n", "<leader>v", function()
-    local command = "/" .. vim.fn.expand("%:t:r")
-    vim.cmd("Ex")
-    vim.cmd(command)
-end)
-
+keymap.set("n", "<leader>v", "<cmd>Ex<cr>2j")
+keymap.set("n", "ci(", "<nop>")
+keymap.set("n", "<leader>ws", utils.doc_mode)
+keymap.set("n", "<leader>we", function() utils.doc_mode("en") end)
 keymap.set("n", "<leader>xd", function()
     require("cellular-automaton").start_animation("make_it_rain")
 end)
-keymap.set("n", "<leader>ws", function()
-    utils.doc_mode("es")
+keymap.set("v", "K", "<nop>")
+keymap.set("v", "<leader>gpy", utils.yank_as_paragraph, {
+    noremap = true,
+    silent = true
+})
+-- keymap.set("v", "<C-c>", "<nop>")
+keymap.set("n", "<leader>ms", function()
+    vim.cmd("tabnew")
+    vim.cmd("DBUI")
 end)
-keymap.set("n", "<leader>we", function()
-    utils.doc_mode("en")
-end)
+for i = 1, 9 do
+    keymap.set("n", "<A-" .. i .. ">", i .. "gt", { silent = true })
+end
+keymap.set("n", "<M-z>", "<cmd>tabclose<CR>")
 
-vim.keymap.set("v", "<leader>ty", function()
-    vim.cmd('normal! Jgv"+yu')
-    vim.schedule(function()
-        print("Paragraph yanked")
-    end)
-end, { noremap = true, silent = true })
+-- bad habits
+-- keymap.set("n", "yio", 'yi(')
+-- keymap.set("n", "dio", 'di(')
+-- keymap.set("n", "vio", 'vi(')
+--
+-- keymap.set("n", "cie", 'ci"')
+-- keymap.set("n", "yie", 'yi"')
+-- keymap.set("n", "die", 'di"')
+-- keymap.set("n", "vie", 'vi"')
+--
+-- keymap.set("n", "dte", 'dt"')
+-- keymap.set("n", "cte", 'ct"')

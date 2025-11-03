@@ -7,5 +7,5 @@ return {
         local lsp_servers = require("utils").lsp_servers
         require("mason").setup()
         require("mason-lspconfig").setup({ ensure_installed = lsp_servers })
-    end,
+    end
 }

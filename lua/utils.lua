@@ -1,21 +1,24 @@
-local cmd = vim.cmd
-local keymap = vim.keymap
+local v = vim
 
 local M = {}
 
-M.treesitter_languages = { "javascript", "typescript", "python", "cpp", "markdown", "latex" }
--- M.lsp_servers = { "clangd", "lua_ls", "pyright", "tsserver", "jdtls", "gopls", "texlab", "kotlin_language_server" }
-M.lsp_servers = { "pyright", "ts_ls", "gopls", "lua_ls", "tinymist", "texlab" }
+M.treesitter_languages = { "javascript", "typescript", "python", "cpp", "markdown" }
+M.lsp_servers = { "pyright", "ts_ls", "gopls", "lua_ls", "tinymist" }
 
 M.doc_mode = function(lang)
-    cmd("set spell")
-    cmd("set spelllang=" .. lang)
-    vim.keymap.set("n", "<leader>s", "z=")
-    vim.keymap.set({ "n", "i" }, "<C-l>", "<Esc>gqap")
+    lang = lang or "es" -- español por defecto
+    v.schedule(function()
+        v.opt_local.spell = true
+        v.opt_local.spelllang = lang
+        v.opt_local.textwidth = 79
+        v.opt_local.wrap = false
+        v.opt_local.formatoptions:append("t")
 
-    vim.opt.textwidth = 79
-    vim.opt.wrap = false
-    vim.opt.formatoptions = vim.opt.formatoptions + "t"
+        v.keymap.set("n", "<leader>s", "z=", { buffer = true })
+        v.keymap.set({ "n", "i" }, "<C-l>", "<Esc>gqap", { buffer = true })
+        -- v.opt_local.foldcolumn = "9"
+        -- v.opt_local.signcolumn = "yes:8"
+    end)
 end
 
 M.get_system_theme = function()
@@ -31,4 +34,35 @@ M.get_system_theme = function()
     end
 end
 
+M.remember_cursor_position = function()
+    local last_pos = v.fn.line([['"]])
+    if last_pos > 0 and last_pos <= v.fn.line("$") then
+        v.schedule(function()
+            v.cmd('normal! g`"zz')
+        end)
+    end
+end
+
+-- M.remember_cursor_position = function()
+--     local last_pos = v.fn.line("''")
+--     if last_pos > 0 and last_pos <= v.fn.line("$") then
+--         v.schedule(function()
+--             pcall(v.cmd, 'normal! g`\'zz') 
+--         end)
+--     end
+-- end
+
+M.yank_as_paragraph = function()
+    vim.cmd('normal! Jgv"+yu')
+    vim.schedule(function()
+        print("Paragraph yanked")
+    end)
+end
+
 return M
+
+-- M.duplicate_current_file = function()
+--     local filename_with_extension = v.fn.expand("%:t")
+--     v.cmd("saveas %:h/cp-" .. filename_with_extension)
+-- end
+

@@ -1,5 +1,9 @@
-local opt = vim.opt
-local cmd = vim.cmd
+local utils = require("utils")
+local v = vim
+
+local api = v.api
+local opt = v.opt
+local cmd = v.cmd
 
 -- options
 opt.guicursor = ""
@@ -30,9 +34,9 @@ opt.smartcase = true
 -- opt.cursorline= true
 
 -- netrw
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
+v.g.netrw_browse_split = 0
+v.g.netrw_banner = 0
+v.g.netrw_winsize = 25
 cmd("au FileType netrw nmap <buffer> a %")
 cmd("au FileType netrw nmap <buffer> r R")
 cmd("au FileType netrw nmap <buffer> <BS> -")
@@ -47,61 +51,34 @@ cmd("au FileType netrw nmap <buffer> i <nop>")
 cmd("set background=dark")
 
 -- yank animation
-vim.api.nvim_create_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('molerocn-highlight-yank', { clear = true }),
+api.nvim_create_autocmd('TextYankPost', {
+    group = api.nvim_create_augroup('molerocn-highlight-yank', { clear = true }),
     callback = function()
-        vim.highlight.on_yank({
-            higroup = "IncSearch",
-            timeout = 40,
-        })
-    end,
-})
-
--- vim.api.nvim_create_autocmd("FileType", {
---     pattern = "sql",
---     callback = function()
---         vim.g.omni_sql_no_default_maps = 0
---     end,
--- })
-
--- activar doc mode cuando se ingresa en un archivo latex
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "tex",
-    callback = function()
-        local utils = require("utils")
-        vim.schedule(function()
-            utils.doc_mode("en")
-        end)
+        v.highlight.on_yank({ higroup = "IncSearch", timeout = 40 })
     end,
 })
 
 -- eliminar el formateo continuo en comentarios
-vim.api.nvim_create_autocmd("FileType", {
+api.nvim_create_autocmd("FileType", {
     pattern = "*",
     callback = function()
-        vim.opt_local.formatoptions:remove({ "c", "r", "o" })
+        v.opt_local.formatoptions:remove({ "c", "r", "o" })
     end,
 })
 
-vim.api.nvim_create_autocmd("BufReadPost", {
+api.nvim_create_autocmd("BufReadPost", {
+    callback = utils.remember_cursor_position
+})
+
+api.nvim_create_autocmd("FileType", {
+    pattern = { "tex", "typst" },
+    callback = utils.doc_mode
+})
+
+api.nvim_create_autocmd("FileType", {
+    pattern = "sql",
     callback = function()
-        local last_pos = vim.fn.line([['"]])
-        if last_pos > 0 and last_pos <= vim.fn.line("$") then
-            vim.schedule(function()
-                vim.cmd('normal! g`"zz')
-            end)
-        end
+        vim.g.omni_sql_no_default_maps = 0
+        v.keymap.set("n", "<C-S>", "<C-c>", { buffer = true })
     end,
 })
-
--- cmd [[let g:copilot_no_tab_map = v:true]]
--- cmd [[let g:copilot_filetypes = {
--- 	      \ 'markdown': v:false,
--- 	      \ 'text': v:false,
--- 	      \ }]]
--- vim.keymap.set('i', '<C-y>', 'copilot#Accept("\\<CR>")', {
--- 	expr = true,
--- 	replace_keycodes = false
--- })
-
----- autocmd para nvimtree

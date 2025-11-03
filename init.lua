@@ -16,3 +16,4 @@ require("remap")
 require("options")
 
 require("lazy").setup("plugins", { defaults = { lazy = true } })
+local _, _ = pcall(require, "databases")
