@@ -4,15 +4,11 @@ return {
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-path",
-        "L3MON4D3/LuaSnip",
     },
     opts = function()
         local cmp = require("cmp")
         local cmp_select = { behavior = cmp.SelectBehavior.Select }
         return {
-            snippet = {
-                expand = function(args) luasnip.lsp_expand(args.body) end
-            },
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
                 { name = "path" },

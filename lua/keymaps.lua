@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+
 vim.keymap.set("v", "H", ":m '<-2<CR>gv=gv")
 vim.keymap.set("v", "M", ":m '>+1<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
@@ -13,5 +14,6 @@ vim.keymap.set("i", "<C-h>", "<C-w>")
 vim.keymap.set("n", "<C-]>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<C-b>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<leader>v", "<cmd>Ex<cr>2j")
-vim.keymap.set({ "n", "i" }, "<C-f>", "<Esc><cmd>!tmux neww ~/personal/.dotfiles/bin/tmux-sessionizer<CR>")
-vim.keymap.set({ "n", "i" }, "<C-n>", "<Esc><cmd>!~/personal/.dotfiles/bin/notebook<CR>")
+vim.keymap.set("n", "<C-f>", "<Esc><cmd>silent !tmux neww ~/personal/.dotfiles/bin/tmux-sessionizer<CR>")
+vim.keymap.set("n", "<C-g>", "<Esc><cmd>silent !tmux neww ~/personal/.dotfiles/bin/notebook<CR>")
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
