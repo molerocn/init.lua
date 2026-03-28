@@ -14,12 +14,6 @@ return {
         vim.keymap.set({ "i", "s" }, "<C-e>l", function() luasnip.jump(1) end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-e>h", function() luasnip.jump(-1) end, { silent = true })
 
-        cmp.setup.filetype({ "sql" }, {
-            sources = {
-                { name = "vim-dadbod-completion" },
-            }
-        })
-
         cmp.setup({
             snippet = {
                 expand = function(args)

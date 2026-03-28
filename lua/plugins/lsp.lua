@@ -12,12 +12,11 @@ return {
 
         require("lsp_signature").setup()
 
-        -- mostrar los diagnostic en tiempo real
+        -- mostrar diagnostic
         -- vim.diagnostic.config({
         --     virtual_text = {
         --         prefix = ' ■ '
         --     },
-        -- --     update_in_insert = true
         -- })
 
         for _, lsp in ipairs(utils.lsp_servers) do

@@ -1,19 +1,15 @@
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
-        lazy = false,
-        config = function()
-            local configs = require("nvim-treesitter.configs")
-            local treesitter_languages = require("utils").treesitter_languages
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    lazy = false,
+    config = function()
+        local configs = require("nvim-treesitter")
 
-            configs.setup({
-                ensure_installed = treesitter_languages,
-                sync_install = false,
-                highlight = { enable = true },
-                indent = { enable = true },
-            })
-        end,
-    },
+        configs.setup({
+            ensure_installed = require("utils").treesitter_languages,
+            sync_install = false,
+            highlight = { enable = true },
+            indent = { enable = true },
+        })
+    end,
 }
