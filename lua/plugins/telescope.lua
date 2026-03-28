@@ -9,7 +9,10 @@ return {
     },
     opts = { defaults = { mappings = { i = { ["<C-u>"] = false } } } },
     keys = {
-        { "<leader>ps", function() require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > "), use_regex = true }) end },
+        { "<leader>ps", function()
+            require('telescope.builtin').grep_string({
+                search = vim.fn.input("Grep > "), use_regex = true })
+        end },
         { "<leader>pf", "<cmd>Telescope find_files<CR>" },
         { "<C-p>", "<cmd>Telescope git_files<CR>" }
     }

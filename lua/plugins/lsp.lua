@@ -9,10 +9,12 @@ return {
     keys = {
         { "<leader>f", function()
             vim.lsp.buf.format({ async = true })
-        end }
+        end },
+        { '[d', vim.diagnostic.goto_prev },
+        { ']d', vim.diagnostic.goto_next }
     },
     config = function()
-        local lsp_servers = { "basedpyright", "ruff" } 
+        local lsp_servers = { "basedpyright" } 
 
         require("lsp_signature").setup()
         require("mason").setup()
@@ -21,5 +23,12 @@ return {
         for _, lsp in ipairs(lsp_servers) do
             vim.lsp.enable(lsp)
         end
+
+        vim.diagnostic.config({
+            float = {
+                source = "always",
+                border = "rounded",
+            },
+        })
     end,
 }

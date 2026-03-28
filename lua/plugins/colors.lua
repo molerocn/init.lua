@@ -5,8 +5,6 @@ return {
     priority = 1000,
     opts = {
         disable_background = true,
-        styles = {
-            italic = false,
-        },
+        styles = { italic = false, },
     }
 }

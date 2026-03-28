@@ -4,9 +4,7 @@ return {
     keys = {
         { "gs", function()
             vim.cmd("Git")
-            vim.schedule(function()
-                vim.cmd('normal! 4j')
-            end)
+            vim.schedule(function() vim.cmd('normal! 4j') end)
         end },
         { "<leader>gp", "<cmd>Git push<CR>" },
         { "<leader>gl", "<cmd>Git log --oneline --decorate --graph --all<CR>" },
