@@ -12,7 +12,7 @@ return {
             { "<C-h>", function() harpoon:list():select(1) end },
             { "<C-t>", function() harpoon:list():select(2) end },
             { "<C-n>", function() harpoon:list():select(3) end },
-            { "<C-s>", function() harpoon:list():select(4) end },
+            { "<C-m>", function() harpoon:list():select(4) end },
         }
     end
 } 
