@@ -24,3 +24,12 @@ vim.opt.smartcase = true
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+
+if vim.g.neovide then
+    vim.keymap.set('n', '<C-S-v>', '"+p')
+    vim.keymap.set('i', '<C-S-v>', '<C-r>+')
+
+    vim.o.guifont = "Monaspace Neon:h13"
+    -- vim.g.neovide_cursor_vfx_mode = "railgun"
+    -- vim.g.neovide_cursor_vfx_particle_density = 7.0
+end
