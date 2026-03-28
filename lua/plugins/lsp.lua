@@ -3,51 +3,23 @@ return {
     lazy = false,
     dependencies = {
         "ray-x/lsp_signature.nvim",
-        "mfussenegger/nvim-jdtls",
+        "williamboman/mason-lspconfig.nvim",
+        "williamboman/mason.nvim" 
+    },
+    keys = {
+        { "<leader>f", function()
+            vim.lsp.buf.format({ async = true })
+        end }
     },
     config = function()
-        local keymap = vim.keymap
-        local cmd = vim.cmd
-        local utils = require("utils")
+        local lsp_servers = { "basedpyright", "ruff" } 
 
         require("lsp_signature").setup()
+        require("mason").setup()
+        require("mason-lspconfig").setup({ ensure_installed = lsp_servers })
 
-        -- mostrar diagnostic
-        -- vim.diagnostic.config({
-        --     virtual_text = {
-        --         prefix = ' ■ '
-        --     },
-        -- })
-
-        for _, lsp in ipairs(utils.lsp_servers) do
+        for _, lsp in ipairs(lsp_servers) do
             vim.lsp.enable(lsp)
         end
-
-        keymap.set('n', '[d', vim.diagnostic.goto_prev)
-        keymap.set('n', ']d', vim.diagnostic.goto_next)
-
-        vim.api.nvim_create_autocmd("LspAttach", {
-            group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-            callback = function(ev)
-                vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-                local opts = { buffer = ev.buf }
-                keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-                keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                keymap.set("n", "K", vim.lsp.buf.hover, opts)
-                keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-                keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-                keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-                keymap.set("n", "<leader>wl", function()
-                    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-                end, opts)
-                keymap.set("n", "<leader>re", vim.lsp.buf.rename, opts)
-                keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-                keymap.set("n", "gr", vim.lsp.buf.references, opts)
-                keymap.set('n', '<leader>f', function()
-                    vim.lsp.buf.format { async = true }
-                end, opts)
-            end,
-        })
     end,
 }
