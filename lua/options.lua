@@ -5,9 +5,8 @@ local api = v.api
 local opt = v.opt
 local cmd = v.cmd
 
--- options
-opt.guicursor = ""
--- opt.cursorline = true
+-- opt.guicursor = ""
+opt.cursorline = true
 opt.nu = true
 opt.relativenumber = true
 opt.tabstop = 4
@@ -31,24 +30,27 @@ opt.colorcolumn = "80"
 opt.splitright = true
 opt.ignorecase = true
 opt.smartcase = true
--- opt.cursorline= true
+-- opt.cursorline = true
 
 -- netrw
 v.g.netrw_browse_split = 0
 v.g.netrw_banner = 0
 v.g.netrw_winsize = 25
-cmd("au FileType netrw nmap <buffer> a %")
-cmd("au FileType netrw nmap <buffer> r R")
-cmd("au FileType netrw nmap <buffer> <BS> -")
+
+-- disable some default keymaps
+-- cmd("au FileType netrw nmap <buffer> v <nop>")
+-- cmd("au FileType netrw nmap <buffer> s <nop>")
+-- cmd("au FileType netrw nmap <buffer> o <nop>")
+-- cmd("au FileType netrw nmap <buffer> t <nop>")
+-- cmd("au FileType netrw nmap <buffer> p <nop>")
+-- cmd("au FileType netrw nmap <buffer> u <nop>")
+-- cmd("au FileType netrw nmap <buffer> i <nop>")
+
+-- custom keymaps
+-- cmd("au FileType netrw nmap <buffer> a %")
+-- cmd("au FileType netrw nmap <buffer> r R")
+-- cmd("au FileType netrw nmap <buffer> <BS> -")
 -- cmd("au FileType netrw nmap <buffer> l <CR>")
-cmd("au FileType netrw nmap <buffer> v <nop>")
-cmd("au FileType netrw nmap <buffer> s <nop>")
-cmd("au FileType netrw nmap <buffer> o <nop>")
-cmd("au FileType netrw nmap <buffer> t <nop>")
-cmd("au FileType netrw nmap <buffer> p <nop>")
-cmd("au FileType netrw nmap <buffer> u <nop>")
-cmd("au FileType netrw nmap <buffer> i <nop>")
-cmd("set background=dark")
 
 -- yank animation
 api.nvim_create_autocmd('TextYankPost', {
@@ -59,26 +61,21 @@ api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- eliminar el formateo continuo en comentarios
-api.nvim_create_autocmd("FileType", {
-    pattern = "*",
-    callback = function()
-        v.opt_local.formatoptions:remove({ "c", "r", "o" })
-    end,
-})
+-- api.nvim_create_autocmd("FileType", {
+--     pattern = "*",
+--     callback = function()
+--         v.opt_local.formatoptions:remove({ "c", "r", "o" })
+--     end,
+-- })
 
 api.nvim_create_autocmd("BufReadPost", {
     callback = utils.remember_cursor_position
 })
 
-api.nvim_create_autocmd("FileType", {
-    pattern = { "tex", "typst" },
-    callback = utils.doc_mode
-})
-
-api.nvim_create_autocmd("FileType", {
-    pattern = "sql",
-    callback = function()
-        vim.g.omni_sql_no_default_maps = 0
-        v.keymap.set("n", "<C-S>", "<C-c>", { buffer = true })
-    end,
-})
+-- api.nvim_create_autocmd("FileType", {
+--     pattern = "sql",
+--     callback = function()
+--         vim.g.omni_sql_no_default_maps = 0
+--         v.keymap.set("n", "<C-S>", "<C-c>", { buffer = true })
+--     end,
+-- })

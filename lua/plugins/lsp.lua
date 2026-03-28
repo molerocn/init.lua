@@ -8,50 +8,17 @@ return {
     config = function()
         local keymap = vim.keymap
         local cmd = vim.cmd
-
         local utils = require("utils")
 
         require("lsp_signature").setup()
 
-        -- lspconfig.jdtls.setup({
-        --     on_attach = function(client, bufnr)
-        --         keymap.set("n", "<leader>jo", function()
-        --             jdtls.organize_imports()
-        --         end)
-        --         keymap.set("n", "<leader>jt", function()
-        --             jdtls.tests.go_to_subject()
-        --         end)
-        --     end
-        -- })
-
-        -- lspconfig.harper_ls.setup({
-        --     filetypes = { "tex" },
-        -- })
-
-        vim.lsp.config("tinymist", {
-            settings = {
-                formatterMode = "typstyle",
-            },
-            on_attach = function(client, bufnr)
-                keymap.set("n", "<leader>ts", function()
-                    client:exec_cmd({
-                        title = "pin",
-                        command = "tinymist.pinMain",
-                        arguments = { vim.api.nvim_buf_get_name(0) },
-                    }, { bufnr = bufnr })
-                    -- cmd("TypstPreview")
-                    utils.doc_mode()
-                end, { noremap = true })
-            end,
-        })
-
         -- mostrar los diagnostic en tiempo real
-        vim.diagnostic.config({
-            virtual_text = {
-                prefix = ' ■ '
-            },
-        --     update_in_insert = true
-        })
+        -- vim.diagnostic.config({
+        --     virtual_text = {
+        --         prefix = ' ■ '
+        --     },
+        -- --     update_in_insert = true
+        -- })
 
         for _, lsp in ipairs(utils.lsp_servers) do
             vim.lsp.enable(lsp)
