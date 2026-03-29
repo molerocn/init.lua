@@ -7,9 +7,6 @@ return {
         "williamboman/mason.nvim" 
     },
     keys = {
-        { "<leader>f", function()
-            vim.lsp.buf.format({ async = true })
-        end },
         { '[d', vim.diagnostic.goto_prev },
         { ']d', vim.diagnostic.goto_next }
     },
@@ -23,12 +20,5 @@ return {
         for _, lsp in ipairs(lsp_servers) do
             vim.lsp.enable(lsp)
         end
-
-        vim.diagnostic.config({
-            float = {
-                source = "always",
-                border = "rounded",
-            },
-        })
     end,
 }

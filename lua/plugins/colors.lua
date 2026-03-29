@@ -3,8 +3,11 @@ return {
     name = "rose-pine",
     lazy = false,
     priority = 1000,
-    opts = {
-        disable_background = true,
-        styles = { italic = false, },
-    }
+    config = function()
+        require('rose-pine').setup({
+            disable_background = true,
+            styles = { italic = false, },
+        })
+        vim.cmd("colorscheme rose-pine")
+    end
 }

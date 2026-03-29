@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 local session = "tmux neww ~/personal/.dotfiles/bin/tmux-sessionizer<CR>"
 local notebook = "tmux neww ~/personal/.dotfiles/bin/notebook<CR>"
 
@@ -15,10 +13,15 @@ vim.keymap.set("i", "<C-h>", "<C-w>")
 vim.keymap.set("n", "<C-]>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<C-b>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<leader>d", "dd<cmd>w<CR>")
-vim.keymap.set("n", "<leader>v", "<cmd>Ex<cr>2j")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<Esc><cmd>w<CR>")
 vim.keymap.set("n", "<C-f>", "<Esc><cmd>silent !" .. session)
 vim.keymap.set("n", "<C-g>", "<Esc><cmd>silent !" .. notebook)
 vim.keymap.set({"n", "i"}, "<C-z>", "<Esc><cmd>q<CR>")
 vim.keymap.set({"n", "v"}, "s", "<Esc><cmd>w<CR>")
+vim.keymap.set('i', '<C-/>', function() vim.cmd("w") vim.cmd("ToggleTerm") end)
+
+if vim.g.neovide then
+    vim.keymap.set('n', '<C-S-v>', '"+p')
+    vim.keymap.set('i', '<C-S-v>', '<C-r>+')
+end
