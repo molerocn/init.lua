@@ -11,7 +11,7 @@ return {
         { ']d', vim.diagnostic.goto_next }
     },
     config = function()
-        local lsp_servers = { "basedpyright" } 
+        local lsp_servers = { "basedpyright", "gopls" } 
 
         require("lsp_signature").setup()
         require("mason").setup()

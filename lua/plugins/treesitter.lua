@@ -3,7 +3,7 @@ return {
      build = ":TSUpdate",
      lazy = false,
      opts = {
-         ensure_installed = { "python", "markdown", "lua" },
+         ensure_installed = { "python", "markdown", "lua", "go" },
          sync_install = false,
          highlight = { enable = true },
          indent = { enable = true },
