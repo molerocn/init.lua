@@ -24,6 +24,8 @@ vim.opt.smartcase = true
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+-- vim.opt.statusline = "%{expand('%:p:h:t')}/%t"
+vim.opt.statusline = "%<%F %m%r%=%-14.(%l,%c%V%) %P"
 
 if vim.g.neovide then
     vim.o.guifont = "Monaspace Neon:h13"

@@ -3,7 +3,7 @@ return {
     branch = "harpoon2",
     lazy = false,
     dependencies = { "nvim-lua/plenary.nvim" },
-    opts = { settings = { save_on_toggle = true } },
+    opts = { settings = { save_on_toggle = true, } },
     keys = function()
         local harpoon = require("harpoon")
         return {
